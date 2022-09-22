@@ -2,12 +2,9 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 
-// const dragonRouter = require("./src/routes/api/contactsRouter");
-// const usersRouter = require("./src/routes/api/userRouter");
 const dataRouter = require("./src/routers/dataRouter.js");
 const authRouter = require("./src/routers/authRouter");
-// const { errorHandler } = require("./src/helpers/apiHelpers");
-//
+
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
