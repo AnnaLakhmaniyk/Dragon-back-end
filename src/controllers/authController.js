@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../db/Cshema");
+const { User } = require("../db/Schema");
 
 const registrationController = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-const { Data } = require("../db/Cshema");
+const { Data } = require("../db/Schema");
 
 const getData = async (req, res) => {
   const data = await Data.find({});
