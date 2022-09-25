@@ -30,29 +30,30 @@ const loginController = async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
     return res.status(200).json({
       token,
-      user: {
-        email: user.email,
-      },
+      email: user.email,
     });
   } catch {
     res.status(400).json({ message: `Validation error` });
   }
 };
 const logoutControlls = async (req, res, next) => {
-  const token = req.token;
-  if (token) {
-    return res.status(204).json("No Content");
-  } else {
-    return res.status(401).json({ message: "Not authorized" });
-  }
+  const user = await User.findByIdAndUpdate(
+    req.userId,
+    { token: null },
+    {
+      new: true,
+    }
+  );
+  return res.status(204).json("No Content");
 };
 
 const currentControlls = async (req, res, next) => {
   const userId = req.user;
 
+  await User.findById(userId);
   if (userId) {
-    const { email, subscription } = userId;
-    return res.status(200).json({ email, subscription });
+    const { email } = userId;
+    return res.status(200).json({ email });
   } else {
     return res.status(401).json({ message: "Not authorized" });
   }
